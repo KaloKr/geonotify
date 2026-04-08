@@ -95,15 +95,6 @@ function getLocation() {
   );
 }
 
-function openMap() {
-  if (currentLat !== null && currentLon !== null) {
-    const url = `https://www.google.com/maps?q=${currentLat},${currentLon}`;
-    window.open(url, "_blank");
-  } else {
-    statusEl.textContent = "Първо трябва да вземете локация.";
-  }
-}
-
 function openNearbyRestaurants() {
   if (currentLat !== null && currentLon !== null) {
     const url = `https://www.google.com/maps/search/restaurants/@${currentLat},${currentLon},15z`;
