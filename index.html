@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoNotify</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>GeoNotify</h1>
+    <p>Уеб приложение за локация и известия.</p>
+
+    <div class="buttons">
+      <button id="notifyBtn">Разреши известия</button>
+      <button id="locationBtn">Намери ме</button>
+      <button id="mapBtn">Покажи на карта</button>
+    </div>
+
+    <section class="card">
+      <h2>Резултат</h2>
+      <p><strong>Ширина:</strong> <span id="latitude">—</span></p>
+      <p><strong>Дължина:</strong> <span id="longitude">—</span></p>
+      <p><strong>Точност:</strong> <span id="accuracy">—</span></p>
+      <p><strong>Статус:</strong> <span id="status">Няма данни</span></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
