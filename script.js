@@ -1,4 +1,3 @@
-const notifyBtn = document.getElementById("notifyBtn");
 const locationBtn = document.getElementById("locationBtn");
 const mapBtn = document.getElementById("mapBtn");
 
@@ -10,9 +9,8 @@ const longitudeEl = document.getElementById("longitude");
 const accuracyEl = document.getElementById("accuracy");
 const statusEl = document.getElementById("status");
 
-notifyBtn.addEventListener("click", requestNotificationPermission);
 locationBtn.addEventListener("click", getLocation);
-mapBtn.addEventListener("click", openMap);
+mapBtn.addEventListener("click", openNearbyRestaurants);
 
 function requestNotificationPermission() {
   if (!("Notification" in window)) {
@@ -63,6 +61,10 @@ function getLocation() {
       accuracyEl.textContent = `${accuracy.toFixed(2)} метра`;
       statusEl.textContent = "Локацията е засечена успешно.";
 
+      if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+
       showNotification(
         "GeoNotify",
         `Локацията е засечена: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`
@@ -96,6 +98,15 @@ function getLocation() {
 function openMap() {
   if (currentLat !== null && currentLon !== null) {
     const url = `https://www.google.com/maps?q=${currentLat},${currentLon}`;
+    window.open(url, "_blank");
+  } else {
+    statusEl.textContent = "Първо трябва да вземете локация.";
+  }
+}
+
+function openNearbyRestaurants() {
+  if (currentLat !== null && currentLon !== null) {
+    const url = `https://www.google.com/maps/search/restaurants/@${currentLat},${currentLon},15z`;
     window.open(url, "_blank");
   } else {
     statusEl.textContent = "Първо трябва да вземете локация.";
