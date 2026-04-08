@@ -97,7 +97,7 @@ function getLocation() {
 
 function openNearbyRestaurants() {
   if (currentLat !== null && currentLon !== null) {
-    const url = `https://www.google.com/maps/search/restaurants/@${currentLat},${currentLon},18z`;
+    const url = `https://www.google.com/maps/search/?api=1&query=restaurants+near+${currentLat},${currentLon}`;
     window.open(url, "_blank");
   } else {
     statusEl.textContent = "Първо трябва да вземете локация.";
