@@ -70,18 +70,24 @@ function getLocation() {
     },
     (error) => {
       if (error.code === 1) {
-        statusEl.textContent = "Достъпът до локацията е отказан.";
+        statusEl.textContent = "Достъпът до локацията е отказан. Разрешете достъп от настройките на браузъра.";
       } else if (error.code === 2) {
-        statusEl.textContent = "Локацията не е налична.";
+        statusEl.textContent = "Локацията не е налична. Проверете дали GPS или услугата за местоположение е включена.";
       } else if (error.code === 3) {
-        statusEl.textContent = "Заявката за локация изтече.";
+        statusEl.textContent = "Не успяхме да вземем локация навреме. Проверете дали локацията е включена и опитайте отново.";
       } else {
-        statusEl.textContent = "Възникна непозната грешка.";
+        statusEl.textContent = "Възникна непозната грешка при получаване на локацията.";
       }
+
+      latitudeEl.textContent = "—";
+      longitudeEl.textContent = "—";
+      accuracyEl.textContent = "—";
+      currentLat = null;
+      currentLon = null;
     },
     {
       enableHighAccuracy: true,
-      timeout: 10000,
+      timeout: 20000,
       maximumAge: 0
     }
   );
