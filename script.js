@@ -1,5 +1,6 @@
 const locationBtn = document.getElementById("locationBtn");
 const mapBtn = document.getElementById("mapBtn");
+const myLocationBtn = document.getElementById("myLocationBtn");
 
 let currentLat = null;
 let currentLon = null;
@@ -11,6 +12,7 @@ const statusEl = document.getElementById("status");
 
 locationBtn.addEventListener("click", getLocation);
 mapBtn.addEventListener("click", openNearbyRestaurants);
+myLocationBtn.addEventListener("click", openMyLocation);
 
 function requestNotificationPermission() {
   if (!("Notification" in window)) {
@@ -97,7 +99,17 @@ function getLocation() {
 
 function openNearbyRestaurants() {
   if (currentLat !== null && currentLon !== null) {
-    const url = `https://www.google.com/maps/search/?api=1&query=restaurants+near+${currentLat},${currentLon}`;
+    const zoom = 18; 
+    const url = `https://www.google.com/maps/search/?api=1&query=restaurants&center=${currentLat},${currentLon}&zoom=${zoom}`;
+    window.open(url, "_blank");
+  } else {
+    statusEl.textContent = "Първо трябва да вземете локация.";
+  }
+}
+
+function openMyLocation() {
+  if (currentLat !== null && currentLon !== null) {
+    const url = `https://www.google.com/maps?q=${currentLat},${currentLon}`;
     window.open(url, "_blank");
   } else {
     statusEl.textContent = "Първо трябва да вземете локация.";
